@@ -56,9 +56,9 @@ See [the API reference](docs/API.md) and [the database design](docs/DATABASE.md)
 ## Deploy to Render
 
 1. Push the repository to GitHub. In Render, create a Blueprint using that repository. Authorize Render to access the repository if prompted.
-2. Choose a new admin email and unique password when Render prompts for `ADMIN_EMAIL` and `ADMIN_PASSWORD`. The included `render.yaml` provisions a Node web service and a PostgreSQL 17 database, and generates the JWT secret.
+2. Deploy the Blueprint. The included `render.yaml` provisions a Node web service and a PostgreSQL 17 database. Render generates the JWT secret and the initial password for `admin@relay.example`. The workspace owner can retrieve `ADMIN_PASSWORD` from the web service's Environment page after deployment.
 3. After the first successful deploy, open the web service's URL and check `/api/health`. Register a requester, submit a ticket, and use a separate admin session to reply and resolve it.
-4. Remove the bootstrap variables after you verify admin access. Share the live URL with the evaluator and share any evaluator credentials through a private channel. Grant the evaluator access if the GitHub repository is private.
+4. Share the live URL with the evaluator and share any evaluator credentials through a private channel. Grant the evaluator access if the GitHub repository is private. Keep the generated password available for evaluator access. Changing the bootstrap variable after account creation does not change the account password.
 
 The Blueprint uses Render's free plans. Account for free database expiration if the evaluator will review the project later. [Render Blueprint reference](https://render.com/docs/blueprint-spec) · [Free plan limits](https://render.com/docs/free)
 
