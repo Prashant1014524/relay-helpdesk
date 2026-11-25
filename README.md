@@ -2,6 +2,8 @@
 
 Relay is a mini support desk built with Node.js, Express, PostgreSQL and React. Requesters submit and track their own tickets. Administrators work from a shared queue and reply in the same conversation.
 
+[Open the live helpdesk](https://relay-helpdesk-9noe.onrender.com/)
+
 ## Run locally
 
 Prerequisites are Node.js 22.12 or later, npm, and PostgreSQL 17. Docker Compose can start PostgreSQL for you.
@@ -48,7 +50,7 @@ Tickets start open. Administrators can change status to open, in progress, resol
 - Express routes validate input with Zod, then apply the role and ownership rules before running parameterized queries through `pg`.
 - Public registration creates requester accounts. Server-side bootstrap provisions administrators. Passwords use salted scrypt hashes and authentication routes have an IP-based rate limit.
 - The API issues one-hour HS256 JWTs in HttpOnly, SameSite=Strict cookies. Production cookies also use Secure. Each protected request reads the current account and role from PostgreSQL. Signing out clears the browser cookie. A previously copied token remains valid until expiry.
-- Ticket mutations publish typed events to a synchronous activity subscriber. The mutation and activity insert commit together. A row lock serializes competing writes to the same ticket. There is no background queue to operate for this assignment.
+- Ticket mutations publish typed events to a synchronous activity subscriber. The mutation and activity insert commit together. A row lock serializes competing writes to the same ticket.
 - React uses the same REST API as external clients. Search supports title, description and ticket reference. Lists expose status and priority filters, three sort orders and pagination. Statistics are scoped to the signed-in role.
 
 See [the API reference](docs/API.md) and [the database design](docs/DATABASE.md).
